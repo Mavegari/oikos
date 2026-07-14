@@ -1,0 +1,35 @@
+### Registrar un usuario nuevo
+POST http://localhost:8080/api/auth/register
+Content-Type: application/json
+
+{
+  "email": "ariadna@oikos.com",
+  "password": "micontraseña123"
+}
+
+### Email inválido (debería fallar con 400)
+POST http://localhost:8080/api/auth/register
+Content-Type: application/json
+
+{
+  "email": "esto-no-es-un-email",
+  "password": "micontraseña123"
+}
+
+### Contraseña corta (debería fallar con 400)
+POST http://localhost:8080/api/auth/register
+Content-Type: application/json
+
+{
+  "email": "otro@oikos.com",
+  "password": "123"
+}
+
+### Email duplicado (repite el primero, debería fallar)
+POST http://localhost:8080/api/auth/register
+Content-Type: application/json
+
+{
+  "email": "ariadna@oikos.com",
+  "password": "micontraseña123"
+}
