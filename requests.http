@@ -1,3 +1,28 @@
+### Acceso a ruta protegida SIN token (debería fallar)
+GET http://localhost:8080/api/auth/me
+
+### Acceso a ruta protegida CON token
+GET http://localhost:8080/api/auth/me
+Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJOiJhcmlhZG5hQG9pa29zLmNvbSIsImlhdCI6MTc4NDAxNzczNCwiZXhwIjoxNzg0MTA0MTM0fQ.EoEHK2ONZwr2zdgfcFWH0UFv-yJBsNMkzYnG0pKeIog
+
+### Login (obtener token JWT)
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "ariadna@oikos.com",
+  "password": "micontraseña123"
+}
+
+### Login con contraseña incorrecta (debería fallar)
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "ariadna@oikos.com",
+  "password": "contraseñaequivocada"
+}
+
 ### Registrar un usuario nuevo
 POST http://localhost:8080/api/auth/register
 Content-Type: application/json

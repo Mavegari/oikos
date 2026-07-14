@@ -1,19 +1,25 @@
 package com.oikos.finance.user;
 
+import com.oikos.finance.security.JwtService;
+import com.oikos.finance.user.dto.LoginRequest;
+import com.oikos.finance.user.dto.AuthResponse;
 import com.oikos.finance.user.dto.RegisterRequest;
 import com.oikos.finance.user.dto.UserResponse;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
 
 @Service
 public class UserService {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final JwtService jwtService;
 
-    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder, JwtService jwtService) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.jwtService = jwtService;
     }
 
     public UserResponse register(RegisterRequest request) {
@@ -35,5 +41,24 @@ public class UserService {
                 savedUser.getEmail(),
                 savedUser.getCreatedAt()
         );
+
+        
+    }
+    
+    public AuthResponse login(LoginRequest request) {
+        // 1. Buscar el usuario por email
+        User user = userRepository.findByEmail(request.email())
+                .orElseThrow(() -> new IllegalArgumentException("Credenciales inválidas"));
+
+        // 2. Comprobar que la contraseña coincide con el hash guardado
+        if (!passwordEncoder.matches(request.password(), user.getPasswordHash())) {
+            throw new IllegalArgumentException("Credenciales inválidas");
+        }
+
+        // 3. Generar el token
+        String token = jwtService.generateToken(user.getEmail());
+
+        // 4. Devolverlo
+        return new AuthResponse(token);
     }
 }
