@@ -1,8 +1,11 @@
+@token = eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhcmlhZG5hQG9pa29zLmNvbSIsImlhdCI6MTc4NTIyNjUwNCwiZXhwIjoxNzg1MzEyOTA0fQ.XaDUS_nhFXf4_jWGhBNi1BzIjLNIFkWswUe_8nDQnzE
+
+@token2 = eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJvdHJvQG9pa29zLmNvbSIsImlhdCI6MTc4NTIyNzEyMywiZXhwIjoxNzg1MzEzNTIzfQ.e8Q225DgOr7nE01A3nIse17KSbl4VWiHorh2KZhpBlw
 ### Acceso a ruta protegida SIN token (debería fallar)
 GET http://localhost:8080/api/auth/me
 
 ### Acceso a ruta protegida CON token
-GET http://localhost:8080/api/auth/me
+GET http://localhost:8080/api/autSh/me
 Authorization: Bearer eyJhbGciOiJIUzI1NiJ9.eyJOiJhcmlhZG5hQG9pa29zLmNvbSIsImlhdCI6MTc4NDAxNzczNCwiZXhwIjoxNzg0MTA0MTM0fQ.EoEHK2ONZwr2zdgfcFWH0UFv-yJBsNMkzYnG0pKeIog
 
 ### Login (obtener token JWT)
@@ -58,3 +61,74 @@ Content-Type: application/json
   "email": "ariadna@oikos.com",
   "password": "micontraseña123"
 }
+
+
+### Crear una categoría
+POST http://localhost:8080/api/categories
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "name": "Nómina",
+  "type": "INCOME",
+  "color": "#4CAF50"
+}
+
+### Crear otra categoría
+POST http://localhost:8080/api/categories
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "name": "Alimentación",
+  "type": "EXPENSE",
+  "color": "#F44336"
+}
+
+### Listar todas mis categorías
+GET http://localhost:8080/api/categories
+Authorization: Bearer {{token}}
+
+
+### Editar una categoría (usa un id real de tu listado)
+PUT http://localhost:8080/api/categories/d59436ae-7eca-4abb-87d5-4b55353d73fc
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "name": "Nómina mensual",
+  "type": "INCOME",
+  "color": "#2E7D32"
+}
+
+### Ver esa categoría concreta
+GET http://localhost:8080/api/categories/d59436ae-7eca-4abb-87d5-4b55353d73fc
+Authorization: Bearer {{token}}
+
+### Eliminar una categoría
+DELETE http://localhost:8080/api/categories/d59436ae-7eca-4abb-87d5-4b55353d73fc
+Authorization: Bearer {{token}}
+
+
+
+### 1. Registrar un segundo usuario
+POST http://localhost:8080/api/auth/register
+Content-Type: application/json
+
+{
+  "email": "otro@oikos.com",
+  "password": "otracontraseña123"
+}
+
+### 2. Login con el segundo usuario
+POST http://localhost:8080/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "otro@oikos.com",
+  "password": "otracontraseña123"
+}
+
+### 3. Listar categorías del segundo usuario (¡debe salir VACÍO!)
+GET http://localhost:8080/api/categories
+Authorization: Bearer {{token2}}
