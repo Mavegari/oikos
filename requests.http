@@ -132,3 +132,30 @@ Content-Type: application/json
 ### 3. Listar categorías del segundo usuario (¡debe salir VACÍO!)
 GET http://localhost:8080/api/categories
 Authorization: Bearer {{token2}}
+
+
+
+
+### Crear una cuenta
+POST http://localhost:8080/api/accounts
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "name": "Cuenta corriente BBVA",
+  "type": "BANK"
+}
+
+### Crear otra cuenta
+POST http://localhost:8080/api/accounts
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "name": "Efectivo",
+  "type": "CASH"
+}
+
+### Listar mis cuentas
+GET http://localhost:8080/api/accounts
+Authorization: Bearer {{token}}
