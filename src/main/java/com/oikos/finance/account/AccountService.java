@@ -2,8 +2,11 @@ package com.oikos.finance.account;
 
 import com.oikos.finance.account.dto.AccountRequest;
 import com.oikos.finance.account.dto.AccountResponse;
+import com.oikos.finance.transaction.TransactionRepository;
+import com.oikos.finance.transaction.TransactionType;
 import com.oikos.finance.user.User;
 import org.springframework.stereotype.Service;
+
 
 import java.math.BigDecimal;
 import java.util.List;
@@ -13,9 +16,12 @@ import java.util.UUID;
 public class AccountService {
 
     private final AccountRepository accountRepository;
+    private final TransactionRepository transactionRepository;
 
-    public AccountService(AccountRepository accountRepository) {
+    public AccountService(AccountRepository accountRepository,
+                          TransactionRepository transactionRepository) {
         this.accountRepository = accountRepository;
+        this.transactionRepository = transactionRepository;
     }
 
     // CREAR
@@ -76,7 +82,10 @@ public class AccountService {
 
     // Cálculo del saldo — de momento cero, se completará con Transaction
     private BigDecimal calculateBalance(Account account) {
-        // TODO: cuando exista Transaction, sumar ingresos y restar gastos de esta cuenta
-        return BigDecimal.ZERO;
+        BigDecimal ingresos = transactionRepository
+                .sumAmountByAccountAndType(account, TransactionType.INCOME);
+        BigDecimal gastos = transactionRepository
+                .sumAmountByAccountAndType(account, TransactionType.EXPENSE);
+        return ingresos.subtract(gastos);
     }
 }
