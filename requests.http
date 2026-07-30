@@ -236,3 +236,11 @@ Authorization: Bearer {{token}}
 ### Ver el presupuesto de nuevo — ahora debería estar superado
 GET http://localhost:8080/api/budgets?month=7&year=2026
 Authorization: Bearer {{token}}
+
+### Dashboard del mes actual (sin parámetros)
+GET http://localhost:8080/api/dashboard/summary
+Authorization: Bearer {{token}}
+
+### Dashboard de julio 2026 (donde tienes datos)
+GET http://localhost:8080/api/dashboard/summary?month=7&year=2026
+Authorization: Bearer {{token}}
