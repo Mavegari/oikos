@@ -37,4 +37,26 @@ public interface TransactionRepository extends JpaRepository<Transaction, UUID> 
             @Param("type") TransactionType type,
             @Param("startDate") LocalDate startDate,
             @Param("endDate") LocalDate endDate);
+
+// Suma de ingresos o gastos del usuario en un rango de fechas (para totales del mes)
+    @Query("SELECT COALESCE(SUM(t.amount), 0) FROM Transaction t " +
+           "WHERE t.user = :user AND t.type = :type " +
+           "AND t.date >= :startDate AND t.date <= :endDate")
+    BigDecimal sumAmountByUserAndTypeAndDateBetween(
+            @Param("user") User user,
+            @Param("type") TransactionType type,
+            @Param("startDate") LocalDate startDate,
+            @Param("endDate") LocalDate endDate);
+
+    // Gasto agrupado por categoría en un rango de fechas (para el gráfico de tarta)
+    @Query("SELECT t.category.name, COALESCE(SUM(t.amount), 0) FROM Transaction t " +
+           "WHERE t.user = :user AND t.type = :type " +
+           "AND t.date >= :startDate AND t.date <= :endDate " +
+           "GROUP BY t.category.name " +
+           "ORDER BY SUM(t.amount) DESC")
+    List<Object[]> sumAmountByCategoryGrouped(
+            @Param("user") User user,
+            @Param("type") TransactionType type,
+            @Param("startDate") LocalDate startDate,
+            @Param("endDate") LocalDate endDate);
 }
