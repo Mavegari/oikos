@@ -1,4 +1,4 @@
-@token = eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhcmlhZG5hQG9pa29zLmNvbSIsImlhdCI6MTc4NTMxNDE2OCwiZXhwIjoxNzg1NDAwNTY4fQ.4JH3wJZcBUKvYi6ee2MKY7SDCyKpjuW3PQHbk9dUL5g
+@token = eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhcmlhZG5hQG9pa29zLmNvbSIsImlhdCI6MTc4NTQwMzM2MSwiZXhwIjoxNzg1NDg5NzYxfQ.gb2a00RK4aWIQwrVHT44Al25fmQP1TIHMULPrQxMRfU
 
 @token2 = eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJvdHJvQG9pa29zLmNvbSIsImlhdCI6MTc4NTIyNzEyMywiZXhwIjoxNzg1MzEzNTIzfQ.e8Q225DgOr7nE01A3nIse17KSbl4VWiHorh2KZhpBlw
 ### Acceso a ruta protegida SIN token (debería fallar)
@@ -204,4 +204,35 @@ Authorization: Bearer {{token}}
 
 ### Ver la cuenta — el balance debe ser 2000 - 150 = 1850
 GET http://localhost:8080/api/accounts/a78730cf-e930-4119-ad34-44ba044843c5
+Authorization: Bearer {{token}}
+
+
+### Crear presupuesto de 200 para Alimentación en julio 2026
+POST http://localhost:8080/api/budgets
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "categoryId": "130408bc-fa55-432f-9d8e-d287f80e5495",
+  "limitAmount": 200.00,
+  "month": 7,
+  "year": 2026
+}
+
+### Gasto que supera el presupuesto (otro gasto de 100 en Alimentación julio)
+POST http://localhost:8080/api/transactions
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "accountId": "a78730cf-e930-4119-ad34-44ba044843c5",
+  "categoryId": "130408bc-fa55-432f-9d8e-d287f80e5495",
+  "amount": 100.00,
+  "type": "EXPENSE",
+  "date": "2026-07-10",
+  "note": "Gasto extra"
+}
+
+### Ver el presupuesto de nuevo — ahora debería estar superado
+GET http://localhost:8080/api/budgets?month=7&year=2026
 Authorization: Bearer {{token}}
