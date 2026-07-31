@@ -34,3 +34,4 @@ build/
 
 # Variables de entorno con credenciales
 .env
+requests.http
