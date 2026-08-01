@@ -36,6 +36,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
             // Desactivamos CSRF: es una API REST stateless, no usa sesiones con cookies
+             .cors(cors -> {})
             .csrf(csrf -> csrf.disable())
 
             // Sin sesiones: cada petición se autentica sola (con JWT, más adelante)
