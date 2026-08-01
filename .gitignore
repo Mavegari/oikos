@@ -1,6 +1,9 @@
-HELP.md
-target/
-.mvn/wrapper/maven-wrapper.jar
+# ===================================
+#  BACKEND (Java / Spring Boot)
+# ===================================
+backend/target/
+backend/HELP.md
+backend/.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
 
@@ -29,9 +32,24 @@ build/
 !**/src/main/**/build/
 !**/src/test/**/build/
 
-### VS Code ###
-.vscode/
+# ===================================
+#  FRONTEND (Node / Vite)
+# ===================================
+web/node_modules/
+web/dist/
+web/*.local
 
-# Variables de entorno con credenciales
+# ===================================
+#  ENTORNO Y CREDENCIALES
+# ===================================
 .env
+backend/.env
+web/.env
 requests.http
+
+# ===================================
+#  IDE / SISTEMA
+# ===================================
+.vscode/
+*.DS_Store
+Thumbs.db
