@@ -1,0 +1,62 @@
+/* ============================================
+   OIKOS · Design Tokens
+   Sistema de diseño compartido por toda la app
+   ============================================ */
+
+:root {
+  /* --- Color de marca (Teal) --- */
+  --oikos-brand-50:  #E1F5EE;
+  --oikos-brand-100: #9FE1CB;
+  --oikos-brand-200: #5DCAA5;
+  --oikos-brand-400: #1D9E75;
+  --oikos-brand-600: #0F6E56;
+  --oikos-brand-800: #085041;
+
+  /* El acento principal que se usa en botones, enlaces, logo */
+  --oikos-brand: var(--oikos-brand-400);
+
+  /* --- Semántica financiera --- */
+  --oikos-income:     #639922;  /* verde: ingresos */
+  --oikos-income-bg:  #EAF3DE;
+  --oikos-income-text:#3B6D11;
+
+  --oikos-expense:      #E24B4A;  /* rojo: gastos */
+  --oikos-expense-bg:   #FCEBEB;
+  --oikos-expense-text: #A32D2D;
+
+  /* --- Superficies y texto (modo claro por defecto) --- */
+  --oikos-bg:          #FAFAF8;  /* fondo de página */
+  --oikos-surface:     #FFFFFF;  /* tarjetas */
+  --oikos-surface-alt: #F1F0EC;  /* tarjetas secundarias */
+  --oikos-border:      #E5E4DF;
+
+  --oikos-text:        #1A1A18;  /* texto principal */
+  --oikos-text-muted:  #6B6A64;  /* texto secundario */
+
+  /* --- Tipografía --- */
+  --oikos-font-sans: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --oikos-font-mono: "SF Mono", "Roboto Mono", "Consolas", monospace;
+
+  /* --- Layout --- */
+  --oikos-radius:      8px;
+  --oikos-radius-card: 12px;
+}
+
+/* --- Modo oscuro --- */
+[data-theme="dark"] {
+  --oikos-income:      #97C459;
+  --oikos-income-bg:   #1E2C27;
+  --oikos-income-text: #97C459;
+
+  --oikos-expense:      #F09595;
+  --oikos-expense-bg:   #2A1E1E;
+  --oikos-expense-text: #F09595;
+
+  --oikos-bg:          #101815;
+  --oikos-surface:     #16211D;
+  --oikos-surface-alt: #1E2C27;
+  --oikos-border:      #2A3A34;
+
+  --oikos-text:        #F0EFEA;
+  --oikos-text-muted:  #8A9691;
+}

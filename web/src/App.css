@@ -1,0 +1,19 @@
+.app-shell {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 2rem;
+}
+
+.app-shell h1 {
+  font-size: 2rem;
+  font-weight: 600;
+  color: var(--oikos-brand);
+}
+
+.app-shell p {
+  color: var(--oikos-text-muted);
+}

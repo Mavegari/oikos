@@ -1,0 +1,25 @@
+@import "./styles/tokens.css";
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  font-family: var(--oikos-font-sans);
+  background: var(--oikos-bg);
+  color: var(--oikos-text);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Los números financieros usan fuente monoespaciada para alinearse */
+.oikos-mono {
+  font-family: var(--oikos-font-mono);
+  font-variant-numeric: tabular-nums;
+}
