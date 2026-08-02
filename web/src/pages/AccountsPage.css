@@ -1,0 +1,192 @@
+.accounts {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+.accounts-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+.accounts-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.btn-primary {
+  background: var(--oikos-brand);
+  color: white;
+  border: none;
+  border-radius: var(--oikos-radius);
+  padding: 9px 16px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background: var(--oikos-brand-600);
+}
+
+.accounts-list {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.account-card {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: var(--oikos-surface);
+  border: 0.5px solid var(--oikos-border);
+  border-radius: var(--oikos-radius-card);
+  padding: 1rem 1.25rem;
+}
+
+.account-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.account-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--oikos-radius);
+  background: var(--oikos-brand-50);
+  color: var(--oikos-brand-600);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 0.75rem;
+}
+
+.account-name {
+  font-weight: 500;
+}
+
+.account-type {
+  font-size: 0.8rem;
+  color: var(--oikos-text-muted);
+}
+
+.account-right {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.account-balance {
+  font-family: var(--oikos-font-mono);
+  font-variant-numeric: tabular-nums;
+  font-weight: 600;
+}
+
+.account-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.btn-icon {
+  background: transparent;
+  border: 0.5px solid var(--oikos-border);
+  border-radius: var(--oikos-radius);
+  padding: 6px 10px;
+  cursor: pointer;
+  font-size: 0.8rem;
+  color: var(--oikos-text-muted);
+}
+
+.btn-icon:hover {
+  border-color: var(--oikos-brand);
+  color: var(--oikos-brand);
+}
+
+.btn-icon.danger:hover {
+  border-color: var(--oikos-expense);
+  color: var(--oikos-expense);
+}
+
+.accounts-empty {
+  text-align: center;
+  color: var(--oikos-text-muted);
+  padding: 3rem;
+  background: var(--oikos-surface-alt);
+  border-radius: var(--oikos-radius-card);
+}
+
+/* Modal para crear/editar */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  z-index: 100;
+}
+
+.modal {
+  background: var(--oikos-surface);
+  border-radius: var(--oikos-radius-card);
+  padding: 1.5rem;
+  width: 100%;
+  max-width: 400px;
+}
+
+.modal-title {
+  font-size: 1.15rem;
+  font-weight: 600;
+  margin-bottom: 1.25rem;
+}
+
+.form-field {
+  margin-bottom: 1rem;
+}
+
+.form-field label {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--oikos-text-muted);
+  margin-bottom: 6px;
+}
+
+.form-field input,
+.form-field select {
+  width: 100%;
+  padding: 9px 12px;
+  font-size: 0.9rem;
+  border: 0.5px solid var(--oikos-border);
+  border-radius: var(--oikos-radius);
+  background: var(--oikos-bg);
+  color: var(--oikos-text);
+  outline: none;
+}
+
+.form-field input:focus,
+.form-field select:focus {
+  border-color: var(--oikos-brand);
+}
+
+.modal-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+  margin-top: 1.5rem;
+}
+
+.btn-secondary {
+  background: transparent;
+  border: 0.5px solid var(--oikos-border);
+  border-radius: var(--oikos-radius);
+  padding: 9px 16px;
+  font-size: 0.9rem;
+  cursor: pointer;
+  color: var(--oikos-text);
+}
