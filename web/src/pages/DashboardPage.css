@@ -1,0 +1,122 @@
+.dashboard {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+.dashboard-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+.dashboard-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.dashboard-logo-mark {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--oikos-radius);
+  background: var(--oikos-brand);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 600;
+}
+
+.dashboard-logo span {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.dashboard-logout {
+  background: transparent;
+  border: 0.5px solid var(--oikos-border);
+  border-radius: var(--oikos-radius);
+  padding: 8px 16px;
+  color: var(--oikos-text);
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.dashboard-logout:hover {
+  border-color: var(--oikos-brand);
+}
+
+.metrics-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-bottom: 2rem;
+}
+
+.metric-card {
+  background: var(--oikos-surface-alt);
+  border-radius: var(--oikos-radius-card);
+  padding: 1.25rem;
+}
+
+.metric-label {
+  font-size: 0.8rem;
+  color: var(--oikos-text-muted);
+  margin-bottom: 6px;
+}
+
+.metric-value {
+  font-size: 1.5rem;
+  font-weight: 600;
+  font-family: var(--oikos-font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+.metric-value.income { color: var(--oikos-income); }
+.metric-value.expense { color: var(--oikos-expense); }
+
+.section-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 1rem;
+}
+
+.category-list {
+  background: var(--oikos-surface);
+  border: 0.5px solid var(--oikos-border);
+  border-radius: var(--oikos-radius-card);
+  overflow: hidden;
+}
+
+.category-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-bottom: 0.5px solid var(--oikos-border);
+}
+
+.category-row:last-child {
+  border-bottom: none;
+}
+
+.category-amount {
+  font-family: var(--oikos-font-mono);
+  font-variant-numeric: tabular-nums;
+  color: var(--oikos-expense);
+  font-weight: 500;
+}
+
+.dashboard-empty {
+  text-align: center;
+  color: var(--oikos-text-muted);
+  padding: 2rem;
+}
+
+.dashboard-loading {
+  text-align: center;
+  color: var(--oikos-text-muted);
+  padding: 4rem;
+}
