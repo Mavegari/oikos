@@ -3,6 +3,7 @@ import LoginPage from './pages/LoginPage.tsx';
 import DashboardPage from './pages/DashboardPage.tsx';
 import ProtectedRoute from './components/ProtectedRoute.tsx';
 import AccountsPage from './pages/AccountsPage.tsx';
+import CategoriesPage from './pages/CategoriesPage.tsx';
 
 function App() {
   return (
@@ -26,6 +27,15 @@ function App() {
           element={
             <ProtectedRoute>
               <AccountsPage />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/categories"
+          element={
+            <ProtectedRoute>
+              <CategoriesPage />
             </ProtectedRoute>
           }
         />
