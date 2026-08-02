@@ -38,16 +38,6 @@ function DashboardPage() {
 
   return (
     <div className="dashboard">
-      <div className="dashboard-header">
-        <div className="dashboard-logo">
-          <div className="dashboard-logo-mark">O</div>
-          <span>Oikos</span>
-        </div>
-        <button className="dashboard-logout" onClick={handleLogout}>
-          Cerrar sesión
-        </button>
-      </div>
-
       {summary ? (
         <>
           <div className="metrics-grid">
