@@ -5,6 +5,7 @@ import ProtectedRoute from './components/ProtectedRoute.tsx';
 import AccountsPage from './pages/AccountsPage.tsx';
 import CategoriesPage from './pages/CategoriesPage.tsx';
 import TransactionsPage from './pages/TransactionsPage.tsx';
+import Layout from './components/Layout.tsx';
 
 function App() {
   return (
@@ -18,7 +19,9 @@ function App() {
           path="/"
           element={
             <ProtectedRoute>
-              <DashboardPage />
+              <Layout>
+                <DashboardPage />
+              </Layout>
             </ProtectedRoute>
           }
         />
@@ -27,7 +30,9 @@ function App() {
           path="/accounts"
           element={
             <ProtectedRoute>
+               <Layout>
               <AccountsPage />
+              </Layout>
             </ProtectedRoute>
           }
         />
@@ -36,7 +41,9 @@ function App() {
           path="/categories"
           element={
             <ProtectedRoute>
+              <Layout>
               <CategoriesPage />
+              </Layout>
             </ProtectedRoute>
           }
         />
@@ -45,7 +52,9 @@ function App() {
           path="/transactions"
           element={
             <ProtectedRoute>
+              <Layout>
               <TransactionsPage />
+              </Layout>
             </ProtectedRoute>
           }
         />
