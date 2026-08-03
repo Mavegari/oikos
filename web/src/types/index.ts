@@ -64,3 +64,17 @@ export interface Transaction {
   date: string;
   note: string | null;
 }
+
+// --- Presupuestos (= BudgetResponse.java) ---
+
+export interface Budget {
+  id: string;
+  categoryId: string;
+  categoryName: string;
+  limitAmount: number;
+  spent: number;
+  remaining: number;
+  month: number;
+  year: number;
+  exceeded: boolean;
+}

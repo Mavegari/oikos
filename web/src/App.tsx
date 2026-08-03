@@ -6,6 +6,7 @@ import AccountsPage from './pages/AccountsPage.tsx';
 import CategoriesPage from './pages/CategoriesPage.tsx';
 import TransactionsPage from './pages/TransactionsPage.tsx';
 import Layout from './components/Layout.tsx';
+import BudgetsPage from './pages/BudgetsPage.tsx';
 
 function App() {
   return (
@@ -54,6 +55,17 @@ function App() {
             <ProtectedRoute>
               <Layout>
               <TransactionsPage />
+              </Layout>
+            </ProtectedRoute>
+          }
+        />
+        
+        <Route
+          path="/budgets"
+          element={
+            <ProtectedRoute>
+              <Layout>
+                <BudgetsPage />
               </Layout>
             </ProtectedRoute>
           }

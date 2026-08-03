@@ -1,0 +1,125 @@
+.budgets {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 2rem 1.5rem;
+}
+
+.budgets-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 2rem;
+}
+
+.budgets-title {
+  font-size: 1.5rem;
+  font-weight: 600;
+}
+
+.budgets-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.budget-card {
+  background: var(--oikos-surface);
+  border: 0.5px solid var(--oikos-border);
+  border-radius: var(--oikos-radius-card);
+  padding: 1.25rem;
+}
+
+.budget-card.exceeded {
+  border-color: var(--oikos-expense);
+}
+
+.budget-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.75rem;
+}
+
+.budget-category {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-weight: 500;
+  font-size: 1.05rem;
+}
+
+.budget-badge {
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 3px 8px;
+  border-radius: 6px;
+  background: var(--oikos-expense-bg);
+  color: var(--oikos-expense-text);
+}
+
+.budget-actions {
+  display: flex;
+  gap: 6px;
+}
+
+.budget-amounts {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 0.6rem;
+  font-family: var(--oikos-font-mono);
+  font-variant-numeric: tabular-nums;
+}
+
+.budget-spent {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+.budget-limit {
+  font-size: 0.9rem;
+  color: var(--oikos-text-muted);
+}
+
+.budget-bar {
+  height: 8px;
+  background: var(--oikos-surface-alt);
+  border-radius: 999px;
+  overflow: hidden;
+}
+
+.budget-bar-fill {
+  height: 100%;
+  border-radius: 999px;
+  transition: width 0.3s ease;
+}
+
+.budget-remaining {
+  margin-top: 0.6rem;
+  font-size: 0.85rem;
+  color: var(--oikos-text-muted);
+}
+
+.budget-remaining.negative {
+  color: var(--oikos-expense-text);
+  font-weight: 500;
+}
+
+.budget-period-selector {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.budget-period-selector select {
+  padding: 7px 12px;
+  font-size: 0.9rem;
+  border: 0.5px solid var(--oikos-border);
+  border-radius: var(--oikos-radius);
+  background: var(--oikos-surface);
+  color: var(--oikos-text);
+  cursor: pointer;
+}
