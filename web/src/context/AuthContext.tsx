@@ -1,7 +1,7 @@
 import { createContext, useContext, useState, useEffect } from 'react';
 import type { ReactNode } from 'react';
-import { login as loginApi } from '../api/auth';
-import type { LoginRequest } from '../types';
+import { login as loginApi, register as registerApi } from '../api/auth';
+import type { LoginRequest, RegisterRequest } from '../types';
 
 // La forma del contexto: qué ofrece a la app
 interface AuthContextType {
@@ -9,6 +9,7 @@ interface AuthContextType {
   isAuthenticated: boolean;
   login: (data: LoginRequest) => Promise<void>;
   logout: () => void;
+  register: (data: RegisterRequest) => Promise<void>;
 }
 
 // Creamos el contexto (vacío al principio)
@@ -27,6 +28,14 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     setToken(response.token);
   }
 
+  async function register(data: RegisterRequest) {
+    await registerApi(data);
+    // Tras registrarse, inicia sesión automáticamente
+    const response = await loginApi({ email: data.email, password: data.password });
+    localStorage.setItem('oikos_token', response.token);
+    setToken(response.token);
+  }
+
   // Función de logout: borra el token
   function logout() {
     localStorage.removeItem('oikos_token');
@@ -37,8 +46,10 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     token,
     isAuthenticated: token !== null,
     login,
+    register,
     logout,
   };
+
 
   return <AuthContext.Provider value={value}>{children}</AuthContext.Provider>;
 }
