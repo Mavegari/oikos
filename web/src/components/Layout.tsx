@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { NavLink, useNavigate } from 'react-router-dom';
 import type { ReactNode } from 'react';
 import { useAuth } from '../context/AuthContext.tsx';
+import { useTheme } from '../context/ThemeContext.tsx';
 import './Layout.css';
 
 const NAV_ITEMS = [
@@ -16,6 +17,7 @@ function Layout({ children }: { children: ReactNode }) {
   const { logout } = useAuth();
   const navigate = useNavigate();
   const [collapsed, setCollapsed] = useState(false);
+  const { theme, toggleTheme } = useTheme();
 
   function handleLogout() {
     logout();
@@ -63,6 +65,10 @@ function Layout({ children }: { children: ReactNode }) {
         </nav>
 
         <div className="sidebar-footer">
+          <button className="sidebar-theme-toggle" onClick={toggleTheme} title="Cambiar tema">
+            <span className="sidebar-icon">{theme === 'light' ? '☾' : '☀'}</span>
+            {!collapsed && <span>{theme === 'light' ? 'Modo oscuro' : 'Modo claro'}</span>}
+          </button>
           <div className="sidebar-user">
             <div className="sidebar-avatar">OK</div>
             {!collapsed && <span className="sidebar-email">Mi cuenta</span>}
@@ -77,8 +83,6 @@ function Layout({ children }: { children: ReactNode }) {
         {children}
       </main>
     </div>
-
-    
   );
 }
 
