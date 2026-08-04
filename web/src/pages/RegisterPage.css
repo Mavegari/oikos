@@ -1,0 +1,120 @@
+.register-container {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.register-card {
+  width: 100%;
+  max-width: 380px;
+  background: var(--oikos-surface);
+  border: 0.5px solid var(--oikos-border);
+  border-radius: var(--oikos-radius-card);
+  padding: 2rem;
+}
+
+.register-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  justify-content: center;
+  margin-bottom: 0.5rem;
+}
+
+.register-logo-mark {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--oikos-radius);
+  background: var(--oikos-brand);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  font-weight: 600;
+  font-size: 18px;
+}
+
+.register-logo h1 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--oikos-text);
+}
+
+.register-subtitle {
+  text-align: center;
+  color: var(--oikos-text-muted);
+  font-size: 0.9rem;
+  margin-bottom: 2rem;
+}
+
+.register-field {
+  margin-bottom: 1.25rem;
+}
+
+.register-field label {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--oikos-text-muted);
+  margin-bottom: 6px;
+}
+
+.register-field input {
+  width: 100%;
+  padding: 10px 12px;
+  font-size: 0.95rem;
+  border: 0.5px solid var(--oikos-border);
+  border-radius: var(--oikos-radius);
+  background: var(--oikos-bg);
+  color: var(--oikos-text);
+  outline: none;
+  transition: border-color 0.15s;
+}
+
+.register-field input:focus {
+  border-color: var(--oikos-brand);
+}
+
+.register-button {
+  width: 100%;
+  padding: 11px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: white;
+  background: var(--oikos-brand);
+  border: none;
+  border-radius: var(--oikos-radius);
+  cursor: pointer;
+  transition: background 0.15s;
+}
+
+.register-button:hover {
+  background: var(--oikos-brand-600);
+}
+
+.register-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+.register-error {
+  background: var(--oikos-expense-bg);
+  color: var(--oikos-expense-text);
+  font-size: 0.85rem;
+  padding: 10px 12px;
+  border-radius: var(--oikos-radius);
+  margin-bottom: 1.25rem;
+}
+
+.register-footer {
+  text-align: center;
+  font-size: 0.85rem;
+  color: var(--oikos-text-muted);
+  margin-top: 1.5rem;
+}
+
+.register-footer a {
+  color: var(--oikos-brand);
+  text-decoration: none;
+}

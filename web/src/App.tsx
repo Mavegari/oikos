@@ -7,6 +7,7 @@ import CategoriesPage from './pages/CategoriesPage.tsx';
 import TransactionsPage from './pages/TransactionsPage.tsx';
 import Layout from './components/Layout.tsx';
 import BudgetsPage from './pages/BudgetsPage.tsx';
+import RegisterPage from './pages/RegisterPage.tsx';
 
 function App() {
   return (
@@ -14,6 +15,7 @@ function App() {
       <Routes>
         {/* Rutas públicas */}
         <Route path="/login" element={<LoginPage />} />
+        <Route path="/register" element={<RegisterPage />} />
 
         {/* Rutas protegidas */}
         <Route
