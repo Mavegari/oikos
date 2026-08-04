@@ -89,6 +89,7 @@
   align-items: center;
   gap: 10px;
   padding: 8px 12px;
+  width: 100%;
 }
 
 .sidebar-avatar {
@@ -200,4 +201,34 @@
 
 .sidebar-toggle:hover {
   color: #5DCAA5;
+}
+
+.sidebar-theme-toggle {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+  padding: 10px 12px;
+  margin-bottom: 8px;
+  border-radius: var(--oikos-radius);
+  background: transparent;
+  border: none;
+  color: #8A9691;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: background 0.15s, color 0.15s;
+}
+
+.sidebar-theme-toggle:hover {
+  background: rgba(29, 158, 117, 0.1);
+  color: #C9D6D1;
+}
+
+.sidebar.collapsed .sidebar-theme-toggle {
+  justify-content: center;
+  padding: 10px 0;
+}
+
+.sidebar.collapsed .sidebar-theme-toggle span:not(.sidebar-icon) {
+  display: none;
 }
