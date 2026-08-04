@@ -1,6 +1,4 @@
 import { useState, useEffect } from 'react';
-import { useNavigate } from 'react-router-dom';
-import { useAuth } from '../context/AuthContext.tsx';
 import { getSummary } from '../api/dashboard.ts';
 import type { DashboardSummary } from '../api/dashboard.ts';
 import './DashboardPage.css';
@@ -9,8 +7,6 @@ function DashboardPage() {
   const [summary, setSummary] = useState<DashboardSummary | null>(null);
   const [loading, setLoading] = useState(true);
 
-  const { logout } = useAuth();
-  const navigate = useNavigate();
 
   useEffect(() => {
     getSummary()
@@ -19,10 +15,6 @@ function DashboardPage() {
       .finally(() => setLoading(false));
   }, []);
 
-  function handleLogout() {
-    logout();
-    navigate('/login');
-  }
 
   // Formatea números como moneda española
   function formatCurrency(amount: number): string {
