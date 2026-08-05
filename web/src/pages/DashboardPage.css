@@ -120,3 +120,19 @@
   color: var(--oikos-text-muted);
   padding: 4rem;
 }
+
+@media (max-width: 768px) {
+  .dashboard {
+    padding: 1.25rem 1rem;
+  }
+
+  /* Las 3 tarjetas se apilan en vertical */
+  .metrics-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* La fila de categoría no se desborda */
+  .category-row {
+    padding: 12px 14px;
+  }
+}

@@ -122,3 +122,17 @@
   border-color: var(--oikos-expense);
   color: var(--oikos-expense-text);
 }
+
+@media (max-width: 768px) {
+  .transactions {
+    padding: 1.25rem 1rem;
+  }
+  .transaction-item {
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  .transaction-right {
+    width: 100%;
+    justify-content: space-between;
+  }
+}

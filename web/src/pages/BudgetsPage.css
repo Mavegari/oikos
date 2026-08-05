@@ -123,3 +123,17 @@
   color: var(--oikos-text);
   cursor: pointer;
 }
+
+@media (max-width: 768px) {
+  .budgets {
+    padding: 1.25rem 1rem;
+  }
+  .budget-top {
+    flex-wrap: wrap;
+    gap: 8px;
+  }
+  .budget-actions {
+    width: 100%;
+    justify-content: flex-end;
+  }
+}

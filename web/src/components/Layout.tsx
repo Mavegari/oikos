@@ -17,6 +17,7 @@ function Layout({ children }: { children: ReactNode }) {
   const { logout } = useAuth();
   const navigate = useNavigate();
   const [collapsed, setCollapsed] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
   const { theme, toggleTheme } = useTheme();
 
   function handleLogout() {
@@ -24,9 +25,27 @@ function Layout({ children }: { children: ReactNode }) {
     navigate('/login');
   }
 
+  function closeMobile() {
+    setMobileOpen(false);
+  }
+
   return (
     <div className="layout">
-      <aside className={collapsed ? 'sidebar collapsed' : 'sidebar'}>
+      {/* Barra superior solo visible en móvil */}
+      <header className="mobile-topbar">
+        <button className="mobile-menu-btn" onClick={() => setMobileOpen(true)} title="Menú">
+          ☰
+        </button>
+        <div className="mobile-topbar-logo">
+          <div className="sidebar-logo-mark">O</div>
+          <span>Oikos</span>
+        </div>
+      </header>
+
+      {/* Fondo oscuro al abrir el menú en móvil */}
+      {mobileOpen && <div className="mobile-overlay" onClick={closeMobile} />}
+
+      <aside className={`sidebar ${collapsed ? 'collapsed' : ''} ${mobileOpen ? 'mobile-open' : ''}`}>
         <div className="sidebar-logo">
           <div
             className="sidebar-logo-mark"
@@ -54,6 +73,7 @@ function Layout({ children }: { children: ReactNode }) {
               to={item.to}
               end={item.end}
               title={item.label}
+              onClick={closeMobile}
               className={({ isActive }) =>
                 isActive ? 'sidebar-link active' : 'sidebar-link'
               }
