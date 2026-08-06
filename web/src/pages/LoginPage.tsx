@@ -71,6 +71,10 @@ function LoginPage() {
         <p className="login-footer">
           ¿No tienes cuenta? <Link to="/register">Regístrate</Link>
         </p>
+        <div className="login-disclaimer">
+          <strong>Proyecto de demostración.</strong> Usa solo datos de prueba, no información real.
+          Las cuentas se eliminan periódicamente.
+        </div>
       </div>
     </div>
   );

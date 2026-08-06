@@ -118,3 +118,17 @@
   color: var(--oikos-brand);
   text-decoration: none;
 }
+
+.login-disclaimer {
+  text-align: center;
+  font-size: 0.72rem;
+  color: var(--oikos-text-muted);
+  margin-top: 1.5rem;
+  padding-top: 1rem;
+  border-top: 0.5px solid var(--oikos-border);
+  line-height: 1.5;
+}
+
+.login-disclaimer strong {
+  color: var(--oikos-text);
+}

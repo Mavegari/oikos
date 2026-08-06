@@ -93,6 +93,10 @@ function RegisterPage() {
         <p className="register-footer">
           ¿Ya tienes cuenta? <Link to="/login">Inicia sesión</Link>
         </p>
+        <div className="register-disclaimer">
+          <strong>Proyecto de demostración.</strong> Usa solo datos de prueba, no información real.
+          Las cuentas se eliminan periódicamente.
+        </div>
       </div>
     </div>
   );
