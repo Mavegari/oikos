@@ -1,65 +1,122 @@
+<div align="center">
+
 # Oikos
 
-API REST para la gestión de finanzas personales, diseñada como sistema multiplataforma: un único backend que sirve datos a clientes de móvil, web y escritorio.
+**Aplicación de finanzas personales multiplataforma**
 
-El nombre viene del griego *oîkos* (οἶκος), "hogar" o "administración del hogar", raíz de la palabra *economía*.
+Un backend único que sirve datos a clientes de web, móvil y escritorio. Gestiona cuentas, categorías, transacciones y presupuestos, con saldos y alertas calculados en tiempo real.
 
-> **Estado del proyecto:** en desarrollo activo. El backend con autenticación y el núcleo financiero (cuentas, categorías y transacciones) está implementado y probado. Los clientes y el despliegue en la nube están planificados. Ver [Estado actual](#estado-actual) para el detalle de qué está hecho y qué no.
+### 🌐 Pruébala en vivo → **[oikosfinanzas.com](https://oikosfinanzas.com)**
 
----
+📖 Documentación de la API → **[Swagger](https://oikosfinanzas.com/swagger-ui/index.html)**
 
-## Visión
+![Dashboard de Oikos](docs/screenshots/dashboard.png)
 
-Oikos nace de una idea sencilla: tener las finanzas personales sincronizadas en cualquier dispositivo, con un backend propio como única fuente de verdad. La lógica de negocio vive centralizada en la API, y los clientes (móvil, web y escritorio) son consumidores ligeros que comparten los mismos datos.
-
-Un principio de diseño recorre todo el proyecto: **los datos derivados no se almacenan, se calculan**. El saldo de una cuenta, por ejemplo, nunca se guarda como un campo; se obtiene sumando sus transacciones en el momento de consultarlo. Esto garantiza que el saldo siempre sea coherente con los movimientos reales.
+</div>
 
 ---
 
-## Estado actual
+> [!NOTE]
+> **Proyecto de demostración.** Oikos es un proyecto personal de aprendizaje y portfolio. La aplicación está disponible públicamente para poder probarla, pero **no debe usarse con datos financieros reales**. Consulta el [aviso legal](#aviso-legal) más abajo.
 
-### Implementado
+---
 
-- **Autenticación y autorización** con JWT (registro, login, tokens firmados con HS256).
-- **Gestión de usuarios** con contraseñas hasheadas mediante BCrypt.
-- **Cuentas** (efectivo, banco, tarjeta) con saldo calculado dinámicamente.
-- **Categorías** de ingreso y gasto.
-- **Transacciones** con relaciones a cuenta y categoría, importes con precisión monetaria y cálculo de saldo en tiempo real.
+## Sobre el proyecto
+
+El nombre viene del griego *oîkos* (οἶκος), «hogar» o «administración del hogar», raíz de la palabra *economía*.
+
+Oikos nace de una idea sencilla: tener las finanzas personales sincronizadas en cualquier dispositivo, con un backend propio como única fuente de verdad. La lógica de negocio vive centralizada en la API, y los clientes son consumidores ligeros que comparten los mismos datos.
+
+Un principio de diseño recorre todo el proyecto: **los datos derivados no se almacenan, se calculan**. El saldo de una cuenta, por ejemplo, nunca se guarda como un campo; se obtiene sumando sus transacciones en el momento de consultarlo. Esto garantiza que el saldo siempre sea coherente con los movimientos reales, sin riesgo de desincronización.
+
+---
+
+## Funcionalidades
+
+- **Autenticación y autorización** con JWT (registro, login, tokens firmados) y contraseñas con BCrypt.
+- **Cuentas** (efectivo, banco, tarjeta) con saldo calculado dinámicamente a partir de las transacciones.
+- **Categorías** de ingreso y gasto, con color personalizable.
+- **Transacciones** con relaciones a cuenta y categoría, importes con precisión monetaria exacta y filtrado por tipo.
+- **Presupuestos** por categoría y mes, con barra de progreso y alerta visual al superar el límite. El gasto real se calcula sumando las transacciones del periodo.
+- **Panel de resumen** con balance total, ingresos y gastos del mes, y desglose de gasto por categoría (agregación en base de datos).
 - **Autorización a nivel de recurso**: cada usuario solo accede a sus propios datos, garantizado en la capa de consulta.
-- **Manejo centralizado de errores** que traduce excepciones a respuestas HTTP con el código y el formato adecuados.
-- **Entorno reproducible** con Docker para la base de datos y gestión de credenciales por variables de entorno.
+- **Modo claro y oscuro** con preferencia persistente.
+- **Diseño responsive**, funcional en escritorio y móvil.
 
-### Planificado
+---
 
-- **Presupuestos** (límite por categoría y mes, con alertas al superarlo).
-- **Panel de resumen** con datos agregados para visualizaciones (gasto por categoría, evolución mensual, balance global).
-- **Clientes multiplataforma**: aplicación Android (Kotlin / Jetpack Compose), web (React + TypeScript) y escritorio (Compose Multiplatform).
-- **Despliegue en la nube** con demo pública en vivo.
+## Capturas
+
+### Escritorio
+
+| Dashboard | Transacciones |
+|-----------|---------------|
+| ![Dashboard](docs/screenshots/dashboard.png) | ![Transacciones](docs/screenshots/transactions.png) |
+
+| Presupuestos | Modo oscuro |
+|--------------|-------------|
+| ![Presupuestos](docs/screenshots/budgets.png) | ![Modo oscuro](docs/screenshots/dashboard-black.png) |
+
+<div align="center">
+
+![Login](docs/screenshots/login.png)
+
+</div>
+
+### Móvil
+
+<div align="center">
+
+<img src="docs/screenshots/mobile-dashboard.png" width="30%" alt="Dashboard movil" /> <img src="docs/screenshots/mobile-menu.png" width="30%" alt="Menu movil" /> <img src="docs/screenshots/mobile-dark-budgets.png" width="30%" alt="Presupuestos movil modo oscuro" />
+
+</div>
 
 ---
 
 ## Stack tecnológico
 
+### Backend
 | Capa | Tecnología |
 |------|------------|
 | Lenguaje | Java 17 |
-| Framework | Spring Boot 4 (Spring Web, Spring Data JPA, Spring Security, Validation) |
+| Framework | Spring Boot 4 (Web, Data JPA, Security, Validation) |
 | Base de datos | PostgreSQL 17 |
 | Autenticación | JSON Web Tokens (JJWT) + BCrypt |
+| Documentación | OpenAPI / Swagger (springdoc) |
 | Contenedores | Docker / Docker Compose |
-| Build | Maven (con wrapper incluido) |
+| Build | Maven (con wrapper) |
+
+### Frontend
+| Capa | Tecnología |
+|------|------------|
+| Framework | React 19 + TypeScript |
+| Build | Vite |
+| Enrutado | React Router |
+| Peticiones HTTP | Axios (con interceptor para el JWT) |
+| Estilos | CSS con design tokens (sistema de diseño propio) |
+
+### Infraestructura
+| Elemento | Detalle |
+|----------|---------|
+| Servidor | VPS (Ubuntu 24.04) |
+| Reverse proxy | Caddy (HTTPS automático con Let's Encrypt) |
+| Servicio | systemd |
+| Dominio | oikosfinanzas.com |
 
 ---
 
 ## Arquitectura
 
-El backend sigue una organización por dominios, y dentro de cada dominio, una separación por capas:
+Monorepo con backend y frontend en un único repositorio:
 
-- **Controller** — recibe las peticiones HTTP, valida el formato y delega. Sin lógica de negocio.
-- **Service** — la lógica de negocio: reglas, validaciones de propiedad y cálculos.
-- **Repository** — el acceso a datos mediante Spring Data JPA.
-- **Entity** — el modelo de dominio mapeado a las tablas.
-- **DTO** — los objetos de entrada y salida de la API, separados de las entidades para no exponer datos internos (como los hashes de contraseña) y para dar a cada cliente exactamente lo que necesita.
+```
+oikos/
+├── backend/     API REST en Spring Boot
+├── web/         Cliente web en React + TypeScript
+└── docs/        Documentación y capturas
+```
+
+El backend sigue una organización **por dominios**, y dentro de cada dominio una separación por capas (Controller → Service → Repository → Entity), con DTOs separados de las entidades para no exponer datos internos.
 
 ### Modelo de datos
 
@@ -67,22 +124,33 @@ El backend sigue una organización por dominios, y dentro de cada dominio, una s
 User (1) ──< (N) Account
 User (1) ──< (N) Category
 User (1) ──< (N) Transaction
+User (1) ──< (N) Budget
 
 Account  (1) ──< (N) Transaction
 Category (1) ──< (N) Transaction
+Category (1) ──< (N) Budget
 ```
 
-Cada entidad de negocio pertenece a un usuario. Una transacción conecta una cuenta y una categoría, y su importe se almacena siempre en positivo: el tipo (ingreso o gasto) determina si suma o resta al saldo. Los saldos negativos —deudas o números rojos— emergen de forma natural del cálculo `ingresos − gastos`, sin necesidad de almacenar importes negativos.
+Cada entidad de negocio pertenece a un usuario. Una transacción conecta una cuenta y una categoría; su importe se almacena siempre en positivo, y el tipo (ingreso o gasto) determina si suma o resta al saldo. Los saldos negativos —deudas o números rojos— emergen de forma natural del cálculo `ingresos − gastos`.
+
+### Decisiones técnicas destacadas
+
+- **Saldos y alertas calculados, no almacenados.** El saldo de una cuenta y el gasto de un presupuesto se derivan de las transacciones mediante consultas de agregación (`SUM`, `GROUP BY`), garantizando coherencia.
+- **`BigDecimal` para el dinero**, nunca `double` o `float`, evitando errores de redondeo.
+- **Autorización a nivel de recurso.** Las consultas incluyen al usuario propietario, de forma que es imposible acceder a datos ajenos aunque se conozca su identificador.
+- **Fechas en UTC** en el backend (`Instant`/`LocalDate` según el significado), delegando la conversión a hora local en el cliente.
+- **Autenticación stateless** con JWT, sin sesiones en servidor.
 
 ---
 
 ## Puesta en marcha (local)
 
-### Requisitos previos
+### Requisitos
+- Java 17 o superior
+- Docker Desktop
+- Node.js 18 o superior
 
-- **Java 17** o superior (JDK).
-- **Docker Desktop** en ejecución.
-- No es necesario instalar PostgreSQL ni Maven por separado: la base de datos corre en un contenedor y Maven se ejecuta mediante el wrapper incluido (`mvnw`).
+No es necesario instalar PostgreSQL ni Maven por separado: la base de datos corre en un contenedor y Maven se ejecuta mediante el wrapper incluido.
 
 ### 1. Clonar el repositorio
 
@@ -91,54 +159,32 @@ git clone https://github.com/Mavegari/oikos.git
 cd oikos
 ```
 
-### 2. Configurar las variables de entorno
-
-El proyecto lee las credenciales de un archivo `.env` que **no se incluye en el repositorio** por seguridad. Se proporciona una plantilla en `.env.example`. Cópiala y rellénala:
+### 2. Backend
 
 ```bash
-cp .env.example .env
+cd backend
+cp .env.example .env        # y rellena las credenciales
+docker compose up -d        # levanta PostgreSQL
+./mvnw spring-boot:run      # en Windows: .\mvnw.cmd spring-boot:run
 ```
 
-Edita el `.env` con tus valores. Para desarrollo local puedes usar:
+La API queda disponible en `http://localhost:8080` y la documentación en `http://localhost:8080/swagger-ui/index.html`.
 
-```
-POSTGRES_DB=oikos
-POSTGRES_USER=oikos_user
-POSTGRES_PASSWORD=oikos_pass
-JWT_SECRET=<una_clave_larga_y_aleatoria_en_base64>
-```
-
-Para generar una clave JWT segura (256 bits):
-
+Para generar una clave JWT segura:
 ```bash
 openssl rand -base64 32
 ```
 
-### 3. Levantar la base de datos
+### 3. Frontend
 
 ```bash
-docker compose up -d
+cd web
+cp .env.example .env        # VITE_API_URL=http://localhost:8080
+npm install
+npm run dev
 ```
 
-Esto arranca un contenedor de PostgreSQL con la configuración del `.env`. Puedes comprobar que está en marcha con `docker ps`.
-
-### 4. Arrancar la aplicación
-
-En Windows:
-
-```bash
-.\mvnw.cmd spring-boot:run
-```
-
-En Linux / macOS:
-
-```bash
-./mvnw spring-boot:run
-```
-
-La primera vez descargará las dependencias. Cuando veas `Started FinanceApplication`, la API estará disponible en `http://localhost:8080`.
-
-Al arrancar, el esquema de la base de datos se crea automáticamente a partir de las entidades.
+La web queda disponible en `http://localhost:5173`.
 
 ---
 
@@ -146,41 +192,54 @@ Al arrancar, el esquema de la base de datos se crea automáticamente a partir de
 
 Todos los endpoints, salvo el registro y el login, requieren un token JWT en la cabecera `Authorization: Bearer <token>`.
 
-### Autenticación
-
 | Método | Ruta | Descripción |
 |--------|------|-------------|
-| `POST` | `/api/auth/register` | Registrar un nuevo usuario |
+| `POST` | `/api/auth/register` | Registrar un usuario |
 | `POST` | `/api/auth/login` | Iniciar sesión y obtener el token |
+| `GET`, `POST` | `/api/accounts` | Cuentas |
+| `GET`, `POST` | `/api/categories` | Categorías |
+| `GET`, `POST` | `/api/transactions` | Transacciones |
+| `GET`, `POST` | `/api/budgets` | Presupuestos |
+| `GET` | `/api/dashboard/summary` | Resumen financiero |
 
-### Recursos (requieren autenticación)
+La documentación interactiva completa está en [Swagger](https://oikosfinanzas.com/swagger-ui/index.html).
 
-| Método | Ruta | Descripción |
-|--------|------|-------------|
-| `GET`, `POST` | `/api/accounts` | Listar / crear cuentas |
-| `GET`, `PUT`, `DELETE` | `/api/accounts/{id}` | Ver / editar / eliminar una cuenta |
-| `GET`, `POST` | `/api/categories` | Listar / crear categorías |
-| `GET`, `PUT`, `DELETE` | `/api/categories/{id}` | Ver / editar / eliminar una categoría |
-| `GET`, `POST` | `/api/transactions` | Listar / crear transacciones |
-| `GET`, `PUT`, `DELETE` | `/api/transactions/{id}` | Ver / editar / eliminar una transacción |
+---
 
-### Ejemplo: registro
+## Roadmap
 
-```bash
-curl -X POST http://localhost:8080/api/auth/register \
-  -H "Content-Type: application/json" \
-  -d '{"email": "usuario@ejemplo.com", "password": "contraseña123"}'
-```
+Oikos es un proyecto en desarrollo activo. Próximas funcionalidades previstas:
 
-### Ejemplo: login
+**Producto (v2)**
+- Saldo inicial al crear una cuenta (indicar el dinero existente al empezar a usar la app).
+- Cuentas que combinan varios productos de una misma entidad (p. ej. banco y tarjeta), y distinción del tipo en los selectores.
+- Transferencias entre cuentas (movimientos ligados entre efectivo y bancos).
+- Gestión de deudas y préstamos.
+- Gastos recurrentes (hipoteca, seguros, suscripciones) con periodicidad configurable.
+- Presupuestos recurrentes.
+- Inversiones con histórico de valoraciones y cálculo de rentabilidad.
+- Panel avanzado con gráficas (evolución mensual, ingresos vs gastos, desglose por categoría) y filtros.
+- Verificación de email en el registro.
 
-```bash
-curl -X POST http://localhost:8080/api/auth/login \
-  -H "Content-Type: application/json" \
-  -d '{"email": "usuario@ejemplo.com", "password": "contraseña123"}'
-```
+**Multiplataforma**
+- Cliente móvil nativo (Kotlin / Jetpack Compose).
+- Cliente de escritorio (Compose Multiplatform).
 
-Devuelve un token que se usa en el resto de peticiones.
+Todos los clientes compartirán el mismo sistema de diseño (design tokens) para una identidad visual coherente entre plataformas.
+
+---
+
+## Aviso legal
+
+Oikos es un **proyecto personal con fines de aprendizaje y demostración (portfolio)**. Al usar la versión pública disponible en [oikosfinanzas.com](https://oikosfinanzas.com), ten en cuenta lo siguiente:
+
+- La aplicación se ofrece **«tal cual», sin garantías** de ningún tipo sobre su disponibilidad, funcionamiento o conservación de los datos.
+- **No introduzcas datos financieros, bancarios ni personales reales.** Utiliza únicamente datos de prueba. Los datos almacenados pueden ser eliminados en cualquier momento sin previo aviso.
+- El autor **no se hace responsable** de ningún daño o pérdida derivada del uso de la aplicación.
+- La aplicación **no está destinada a la gestión financiera real** ni sustituye a ninguna herramienta bancaria o profesional.
+- Las contraseñas se almacenan cifradas (BCrypt) y la comunicación va sobre HTTPS, pero al tratarse de un proyecto de demostración **no debe considerarse un entorno de producción seguro** para información sensible.
+
+Si tienes cualquier duda sobre el tratamiento de los datos, puedes contactar a través del [repositorio en GitHub](https://github.com/Mavegari/oikos).
 
 ---
 
