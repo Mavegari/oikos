@@ -229,17 +229,20 @@ Todos los clientes compartirán el mismo sistema de diseño (design tokens) para
 
 ---
 
-## Aviso legal
+## Aviso legal y protección de datos
 
-Oikos es un **proyecto personal con fines de aprendizaje y demostración (portfolio)**. Al usar la versión pública disponible en [oikosfinanzas.com](https://oikosfinanzas.com), ten en cuenta lo siguiente:
+Oikos es un **proyecto personal sin ánimo de lucro, con fines exclusivamente de aprendizaje y demostración (portfolio)**. No es un servicio comercial ni una herramienta financiera real. Al acceder a la versión pública en [oikosfinanzas.com](https://oikosfinanzas.com), aceptas lo siguiente:
 
-- La aplicación se ofrece **«tal cual», sin garantías** de ningún tipo sobre su disponibilidad, funcionamiento o conservación de los datos.
-- **No introduzcas datos financieros, bancarios ni personales reales.** Utiliza únicamente datos de prueba. Los datos almacenados pueden ser eliminados en cualquier momento sin previo aviso.
-- El autor **no se hace responsable** de ningún daño o pérdida derivada del uso de la aplicación.
-- La aplicación **no está destinada a la gestión financiera real** ni sustituye a ninguna herramienta bancaria o profesional.
-- Las contraseñas se almacenan cifradas (BCrypt) y la comunicación va sobre HTTPS, pero al tratarse de un proyecto de demostración **no debe considerarse un entorno de producción seguro** para información sensible.
+- La aplicación se ofrece **«tal cual» (*as is*), sin garantías** de ningún tipo sobre disponibilidad, funcionamiento, seguridad o conservación de datos.
+- **Utiliza únicamente datos de prueba ficticios.** No introduzcas datos financieros, bancarios ni personales reales, ni información de terceros.
+- Los **usuarios registrados y sus datos se eliminan periódicamente** sin previo aviso. No uses la aplicación para almacenar información que necesites conservar.
+- El único dato personal que se solicita es una **dirección de correo electrónico** para el registro. Se recomienda usar un correo ficticio o de prueba. Las contraseñas se almacenan cifradas (BCrypt) y la comunicación viaja sobre HTTPS.
+- El autor **no se hace responsable** de ningún daño, pérdida o perjuicio derivado del uso de la aplicación, ni garantiza que esté libre de errores.
+- Este proyecto **no está destinado a la gestión financiera real** y no sustituye a ninguna herramienta bancaria o profesional.
 
-Si tienes cualquier duda sobre el tratamiento de los datos, puedes contactar a través del [repositorio en GitHub](https://github.com/Mavegari/oikos).
+Si en algún momento quieres que se elimine tu cuenta o tienes cualquier consulta sobre los datos, puedes solicitarlo a través del [repositorio en GitHub](https://github.com/Mavegari/oikos).
+
+> **Nota:** Este descargo de responsabilidad es un texto orientativo propio de un proyecto de demostración y no constituye asesoramiento jurídico. Si Oikos pasara a ser un servicio real con usuarios efectivos, sería necesario redactar una política de privacidad conforme al RGPD con asesoramiento profesional.
 
 ---
 
