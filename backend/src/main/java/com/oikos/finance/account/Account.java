@@ -24,17 +24,13 @@ public class Account {
     @Column(nullable = false)
     private AccountType type;
 
-    @Column(nullable = false)
-    private BigDecimal initialBalance;
-
     protected Account() {
     }
 
-    public Account(User user, String name, AccountType type, BigDecimal initialBalance) {
-    this.user = user;
-    this.name = name;
-    this.type = type;
-    this.initialBalance = initialBalance != null ? initialBalance : BigDecimal.ZERO;
+    public Account(User user, String name, AccountType type) {
+        this.user = user;
+        this.name = name;
+        this.type = type;
     }
 
     // Getters y setters
@@ -64,13 +60,5 @@ public class Account {
 
     public void setType(AccountType type) {
         this.type = type;
-    }
-
-    public BigDecimal getInitialBalance() {
-    return initialBalance;
-    }
-
-    public void setInitialBalance(BigDecimal initialBalance) {
-    this.initialBalance = initialBalance;
     }
 }

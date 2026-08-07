@@ -10,9 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-import com.oikos.finance.dashboard.dto.DashboardSummary;
-import com.oikos.finance.dashboard.dto.MonthlyDataPoint;
-import java.util.List;
 
 import java.time.LocalDate;
 
@@ -47,31 +44,5 @@ public class DashboardController {
 
         return ResponseEntity.ok(
                 dashboardService.getSummary(user, targetMonth, targetYear));
-    }
-
-    /**
- * Obtiene resumen general de todas las transacciones (sin filtro de mes)
- */
-    @GetMapping("/summary-all")
-    public ResponseEntity<DashboardSummary> getSummaryAll(
-        @AuthenticationPrincipal UserDetails userDetails) {
-    User user = getCurrentUser(userDetails);
-    return ResponseEntity.ok(dashboardService.getSummary(user));
-    }
-
-    /**
- * Obtiene serie mensual de ingresos, gastos y neto para un año específico
- */
-    @GetMapping("/monthly")
-    public ResponseEntity<List<MonthlyDataPoint>> getMonthlySeries(
-        @RequestParam(required = false) Integer year,
-        @AuthenticationPrincipal UserDetails userDetails) {
-    User user = getCurrentUser(userDetails);
-    
-    // Si no se indica año, usar el año actual
-    LocalDate now = LocalDate.now();
-    int targetYear = (year != null) ? year : now.getYear();
-    
-    return ResponseEntity.ok(dashboardService.getMonthlySeries(user, targetYear));
     }
 }

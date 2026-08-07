@@ -26,13 +26,13 @@ public class AccountService {
 
     // CREAR
     public AccountResponse create(AccountRequest request, User user) {
-    if (accountRepository.existsByUserAndName(user, request.name())) {
-        throw new IllegalArgumentException("Ya tienes una cuenta con ese nombre");
-    }
+        if (accountRepository.existsByUserAndName(user, request.name())) {
+            throw new IllegalArgumentException("Ya tienes una cuenta con ese nombre");
+        }
 
-    Account account = new Account(user, request.name(), request.type(), request.initialBalance());
-    Account saved = accountRepository.save(account);
-    return toResponse(saved);
+        Account account = new Account(user, request.name(), request.type());
+        Account saved = accountRepository.save(account);
+        return toResponse(saved);
     }
 
     // LISTAR
@@ -52,15 +52,14 @@ public class AccountService {
 
     // ACTUALIZAR
     public AccountResponse update(UUID id, AccountRequest request, User user) {
-    Account account = accountRepository.findByIdAndUser(id, user)
-            .orElseThrow(() -> new IllegalArgumentException("Cuenta no encontrada"));
+        Account account = accountRepository.findByIdAndUser(id, user)
+                .orElseThrow(() -> new IllegalArgumentException("Cuenta no encontrada"));
 
-    account.setName(request.name());
-    account.setType(request.type());
-    account.setInitialBalance(request.initialBalance());
+        account.setName(request.name());
+        account.setType(request.type());
 
-    Account updated = accountRepository.save(account);
-    return toResponse(updated);
+        Account updated = accountRepository.save(account);
+        return toResponse(updated);
     }
 
     // ELIMINAR
@@ -72,23 +71,21 @@ public class AccountService {
 
     // Conversión entidad → DTO, con cálculo de balance
     private AccountResponse toResponse(Account account) {
-    BigDecimal balance = calculateBalance(account);
-    return new AccountResponse(
-            account.getId(),
-            account.getName(),
-            account.getType(),
-            account.getInitialBalance(),
-            balance
-    );
+        BigDecimal balance = calculateBalance(account);
+        return new AccountResponse(
+                account.getId(),
+                account.getName(),
+                account.getType(),
+                balance
+        );
     }
 
     // Cálculo del saldo — de momento cero, se completará con Transaction
     private BigDecimal calculateBalance(Account account) {
-    BigDecimal ingresos = transactionRepository
-            .sumAmountByAccountAndType(account, TransactionType.INCOME);
-    BigDecimal gastos = transactionRepository
-            .sumAmountByAccountAndType(account, TransactionType.EXPENSE);
-    BigDecimal transactionBalance = ingresos.subtract(gastos);
-    return account.getInitialBalance().add(transactionBalance);
+        BigDecimal ingresos = transactionRepository
+                .sumAmountByAccountAndType(account, TransactionType.INCOME);
+        BigDecimal gastos = transactionRepository
+                .sumAmountByAccountAndType(account, TransactionType.EXPENSE);
+        return ingresos.subtract(gastos);
     }
 }
