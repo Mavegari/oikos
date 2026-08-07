@@ -8,6 +8,14 @@ import com.oikos.finance.transaction.TransactionRepository;
 import com.oikos.finance.transaction.TransactionType;
 import com.oikos.finance.user.User;
 import org.springframework.stereotype.Service;
+import com.oikos.finance.category.Category;
+import com.oikos.finance.dashboard.dto.CategoryBreakdown;
+import com.oikos.finance.dashboard.dto.DashboardSummary;
+import com.oikos.finance.dashboard.dto.MonthlyDataPoint;
+import com.oikos.finance.transaction.Transaction;
+import java.math.RoundingMode;
+import java.time.YearMonth;
+import java.util.*;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -79,4 +87,110 @@ public class DashboardService {
 
         return total;
     }
+    /**
+ * Obtiene resumen general de todas las transacciones del usuario (sin filtrar por mes)
+ */
+public DashboardSummary getSummary(User user) {
+    List<Transaction> transactions = transactionRepository.findByUser(user);
+    
+    BigDecimal totalIncome = transactions.stream()
+            .filter(t -> t.getType() == TransactionType.INCOME)
+            .map(Transaction::getAmount)
+            .reduce(BigDecimal.ZERO, BigDecimal::add);
+    
+    BigDecimal totalExpense = transactions.stream()
+            .filter(t -> t.getType() == TransactionType.EXPENSE)
+            .map(Transaction::getAmount)
+            .reduce(BigDecimal.ZERO, BigDecimal::add);
+    
+    BigDecimal netBalance = totalIncome.subtract(totalExpense);
+    
+    List<CategoryBreakdown> incomeByCategory = calculateCategoryBreakdown(
+            transactions, TransactionType.INCOME, totalIncome
+    );
+    
+    List<CategoryBreakdown> expenseByCategory = calculateCategoryBreakdown(
+            transactions, TransactionType.EXPENSE, totalExpense
+    );
+    
+    return new DashboardSummary(
+            totalIncome,
+            totalExpense,
+            netBalance,
+            incomeByCategory,
+            expenseByCategory
+    );
+}
+
+/**
+ * Obtiene serie mensual para un año específico
+ */
+public List<MonthlyDataPoint> getMonthlySeries(User user, Integer year) {
+    List<MonthlyDataPoint> result = new ArrayList<>();
+    List<Transaction> transactions = transactionRepository.findByUser(user);
+    
+    Map<YearMonth, List<Transaction>> byMonth = new HashMap<>();
+    for (Transaction t : transactions) {
+        if (t.getDate().getYear() == year) {
+            YearMonth ym = YearMonth.of(t.getDate().getYear(), t.getDate().getMonth());
+            byMonth.computeIfAbsent(ym, k -> new ArrayList<>()).add(t);
+        }
+    }
+    
+    for (int month = 1; month <= 12; month++) {
+        YearMonth ym = YearMonth.of(year, month);
+        List<Transaction> monthTransactions = byMonth.getOrDefault(ym, Collections.emptyList());
+        
+        BigDecimal income = monthTransactions.stream()
+                .filter(t -> t.getType() == TransactionType.INCOME)
+                .map(Transaction::getAmount)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+        
+        BigDecimal expense = monthTransactions.stream()
+                .filter(t -> t.getType() == TransactionType.EXPENSE)
+                .map(Transaction::getAmount)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+        
+        BigDecimal net = income.subtract(expense);
+        result.add(new MonthlyDataPoint(month, year, income, expense, net));
+    }
+    
+    return result;
+}
+
+/**
+ * Calcula desglose por categoría con porcentajes
+ */
+private List<CategoryBreakdown> calculateCategoryBreakdown(
+        List<Transaction> transactions, TransactionType type, BigDecimal total) {
+    
+    Map<Category, BigDecimal> byCategory = new HashMap<>();
+    
+    for (Transaction t : transactions) {
+        if (t.getType() == type) {
+            byCategory.merge(t.getCategory(), t.getAmount(), BigDecimal::add);
+        }
+    }
+    
+    List<CategoryBreakdown> result = new ArrayList<>();
+    
+    if (total.compareTo(BigDecimal.ZERO) > 0) {
+        for (Map.Entry<Category, BigDecimal> entry : byCategory.entrySet()) {
+            Double percentage = entry.getValue()
+                    .divide(total, 4, RoundingMode.HALF_UP)
+                    .multiply(new BigDecimal(100))
+                    .doubleValue();
+            
+            result.add(new CategoryBreakdown(
+                    entry.getKey().getId(),
+                    entry.getKey().getName(),
+                    entry.getValue(),
+                    percentage
+            ));
+        }
+    }
+    
+    result.sort((a, b) -> b.amount().compareTo(a.amount()));
+    return result;
+        }
 }
