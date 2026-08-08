@@ -8,6 +8,8 @@ import TransactionsPage from './pages/TransactionsPage.tsx';
 import Layout from './components/Layout.tsx';
 import BudgetsPage from './pages/BudgetsPage.tsx';
 import RegisterPage from './pages/RegisterPage.tsx';
+import InvestmentsPage from './pages/InvestmentsPage.tsx';
+import DebtsPage from './pages/DebtsPage.tsx';
 
 function App() {
   return (
@@ -68,6 +70,28 @@ function App() {
             <ProtectedRoute>
               <Layout>
                 <BudgetsPage />
+              </Layout>
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/investments"
+          element={
+            <ProtectedRoute>
+              <Layout>
+                <InvestmentsPage />
+              </Layout>
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/debts"
+          element={
+            <ProtectedRoute>
+              <Layout>
+                <DebtsPage />
               </Layout>
             </ProtectedRoute>
           }
