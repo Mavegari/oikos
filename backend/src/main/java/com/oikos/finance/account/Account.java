@@ -2,6 +2,7 @@ package com.oikos.finance.account;
 
 import com.oikos.finance.user.User;
 import jakarta.persistence.*;
+import java.math.BigDecimal;
 
 import java.util.UUID;
 
