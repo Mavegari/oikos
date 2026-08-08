@@ -15,9 +15,3 @@ public record InvestmentResponse(
     List<InvestmentValuationDTO> valuations,
     Instant createdAt
 ) {}
-
-record InvestmentValuationDTO(
-    UUID id,
-    BigDecimal value,
-    String date
-) {}
