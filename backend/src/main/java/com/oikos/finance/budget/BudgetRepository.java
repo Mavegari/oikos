@@ -22,4 +22,7 @@ public interface BudgetRepository extends JpaRepository<Budget, UUID> {
     // Comprobar duplicado antes de crear (mismo user+categoría+mes+año)
     boolean existsByUserAndCategoryAndMonthAndYear(
             User user, Category category, int month, int year);
+    
+    // Obtener todos los presupuestos recurrentes
+    List<Budget> findByRecurringTrue();
 }

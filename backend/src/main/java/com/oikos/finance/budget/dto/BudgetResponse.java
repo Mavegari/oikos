@@ -12,6 +12,7 @@ public record BudgetResponse(
         BigDecimal remaining,
         int month,
         int year,
+        Boolean recurring,
         boolean exceeded
 ) {
 }

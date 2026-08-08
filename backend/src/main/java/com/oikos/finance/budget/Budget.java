@@ -38,15 +38,19 @@ public class Budget {
     @Column(nullable = false)
     private int year;
 
+    @Column(nullable = false)
+    private Boolean recurring; // default FALSE
+
     protected Budget() {
     }
 
-    public Budget(User user, Category category, BigDecimal limitAmount, int month, int year) {
-        this.user = user;
-        this.category = category;
-        this.limitAmount = limitAmount;
-        this.month = month;
-        this.year = year;
+    public Budget(User user, Category category, BigDecimal limitAmount, int month, int year, Boolean recurring) {
+    this.user = user;
+    this.category = category;
+    this.limitAmount = limitAmount;
+    this.month = month;
+    this.year = year;
+    this.recurring = recurring != null ? recurring : false;
     }
 
     // Getters y setters
@@ -66,4 +70,12 @@ public class Budget {
 
     public int getYear() { return year; }
     public void setYear(int year) { this.year = year; }
+
+    public Boolean getRecurring() {
+    return recurring;
+    }
+
+    public void setRecurring(Boolean recurring) {
+    this.recurring = recurring;
+    }
 }
