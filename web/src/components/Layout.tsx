@@ -11,6 +11,8 @@ const NAV_ITEMS = [
   { to: '/categories', label: 'Categorías', icon: '◈', end: false },
   { to: '/transactions', label: 'Transacciones', icon: '⇄', end: false },
   { to: '/budgets', label: 'Presupuestos', icon: '◎', end: false },
+  { to: '/investments', label: 'Inversiones', icon: '▲', end: false },
+  { to: '/debts', label: 'Deudas', icon: '◇', end: false },
 ];
 
 function Layout({ children }: { children: ReactNode }) {
