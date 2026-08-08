@@ -78,3 +78,59 @@ export interface Budget {
   year: number;
   exceeded: boolean;
 }
+
+// --- Transferencias (= TransferResponse.java) ---
+export interface Transfer {
+  id: string;
+  sourceAccountId: string;
+  sourceAccountName: string;
+  targetAccountId: string;
+  targetAccountName: string;
+  amount: number;
+  date: string;
+  note: string | null;
+}
+
+// --- Presupuestos Recurrentes (= BudgetResponse.java actualizado) ---
+export interface BudgetRecurring extends Budget {
+  recurring: boolean;
+}
+
+// --- Inversiones (= InvestmentResponse.java) ---
+export interface Investment {
+  id: string;
+  name: string;
+  investedAmount: number;
+  currentValue: number;
+  profitLoss: number;
+  profitLossPercentage: number;
+  valuations: InvestmentValuation[];
+  createdAt: string;
+}
+
+export interface InvestmentValuation {
+  id: string;
+  value: number;
+  date: string;
+}
+
+// --- Deudas (= DebtResponse.java) ---
+export type DebtType = 'I_OWE' | 'OWED_TO_ME';
+
+export interface Debt {
+  id: string;
+  name: string;
+  totalAmount: number;
+  paid: number;
+  pending: number;
+  pendingPercentage: number;
+  type: DebtType;
+  payments: DebtPayment[];
+  createdAt: string;
+}
+
+export interface DebtPayment {
+  id: string;
+  amount: number;
+  date: string;
+}
