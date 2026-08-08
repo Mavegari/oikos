@@ -19,6 +19,7 @@ function AccountsPage() {
   const [editingId, setEditingId] = useState<string | null>(null);
   const [formName, setFormName] = useState('');
   const [formType, setFormType] = useState<AccountType>('BANK');
+  const [formInitialBalance, setFormInitialBalance] = useState<number>(0);
 
   // Cargar cuentas al montar
   useEffect(() => {
@@ -45,6 +46,7 @@ function AccountsPage() {
     setFormName('');
     setFormType('BANK');
     setModalOpen(true);
+    setFormInitialBalance(0);
   }
 
   // Abrir modal para editar
@@ -53,11 +55,12 @@ function AccountsPage() {
     setFormName(account.name);
     setFormType(account.type);
     setModalOpen(true);
+    setFormInitialBalance(account.initialBalance);
   }
 
   // Guardar (crear o editar según el caso)
   async function handleSave() {
-    const data: AccountInput = { name: formName, type: formType };
+    const data: AccountInput = { name: formName, type: formType, initialBalance: formInitialBalance };
     if (editingId) {
       await updateAccount(editingId, data);
     } else {
@@ -143,6 +146,17 @@ function AccountsPage() {
                 <option value="CASH">Efectivo</option>
                 <option value="CARD">Tarjeta</option>
               </select>
+              <div className="form-field">
+              <label htmlFor="initialBalance">Saldo Inicial</label>
+              <input
+                id="initialBalance"
+                type="number"
+                step="0.01"
+                value={formInitialBalance}
+                onChange={(e) => setFormInitialBalance(parseFloat(e.target.value) || 0)}
+                placeholder="0.00"
+              />
+            </div>
             </div>
 
             <div className="modal-actions">
