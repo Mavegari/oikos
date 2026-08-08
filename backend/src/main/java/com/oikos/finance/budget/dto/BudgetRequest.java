@@ -24,6 +24,8 @@ public record BudgetRequest(
 
         @NotNull(message = "El año es obligatorio")
         @Min(value = 2000, message = "El año no es válido")
-        Integer year
+        Integer year,
+        
+        Boolean recurring
 ) {
 }
