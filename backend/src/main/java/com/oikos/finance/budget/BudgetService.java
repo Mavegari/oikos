@@ -42,11 +42,11 @@ public class BudgetService {
                     "Ya tienes un presupuesto para esta categoría en ese mes");
         }
 
-        Budget budget = new Budget(
+       Budget budget = new Budget(
                 user, category, request.limitAmount(),
-                request.month(), request.year());
+                request.month(), request.year(),
+                request.recurring() != null ? request.recurring() : false);
         Budget saved = budgetRepository.save(budget);
-        return toResponse(saved);
     }
 
     // LISTAR (todos, o filtrados por mes/año si se indican)
@@ -65,6 +65,7 @@ public class BudgetService {
     }
 
     // ACTUALIZAR
+    
     public BudgetResponse update(UUID id, BudgetRequest request, User user) {
         Budget budget = budgetRepository.findByIdAndUser(id, user)
                 .orElseThrow(() -> new IllegalArgumentException("Presupuesto no encontrado"));
@@ -76,6 +77,7 @@ public class BudgetService {
         budget.setLimitAmount(request.limitAmount());
         budget.setMonth(request.month());
         budget.setYear(request.year());
+        budget.setRecurring(request.recurring() != null ? request.recurring() : false);
 
         Budget updated = budgetRepository.save(budget);
         return toResponse(updated);
@@ -94,7 +96,7 @@ public class BudgetService {
         BigDecimal remaining = budget.getLimitAmount().subtract(spent);
         boolean exceeded = spent.compareTo(budget.getLimitAmount()) > 0;
 
-        return new BudgetResponse(
+       return new BudgetResponse(
                 budget.getId(),
                 budget.getCategory().getId(),
                 budget.getCategory().getName(),
@@ -103,6 +105,7 @@ public class BudgetService {
                 remaining,
                 budget.getMonth(),
                 budget.getYear(),
+                budget.getRecurring(),
                 exceeded
         );
     }
