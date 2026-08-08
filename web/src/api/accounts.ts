@@ -5,6 +5,7 @@ import type { Account, AccountType } from '../types';
 export interface AccountInput {
   name: string;
   type: AccountType;
+  initialBalance: number;
 }
 
 // Listar todas las cuentas del usuario

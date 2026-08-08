@@ -29,14 +29,14 @@ export interface UserResponse {
   createdAt: string;
 }
 
+
 // --- Cuentas (= AccountResponse.java) ---
-
 export type AccountType = 'CASH' | 'BANK' | 'CARD';
-
 export interface Account {
   id: string;
   name: string;
   type: AccountType;
+  initialBalance: number;
   balance: number;
 }
 
