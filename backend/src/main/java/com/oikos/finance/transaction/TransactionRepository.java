@@ -59,4 +59,14 @@ public interface TransactionRepository extends JpaRepository<Transaction, UUID> 
             @Param("type") TransactionType type,
             @Param("startDate") LocalDate startDate,
             @Param("endDate") LocalDate endDate);
+       
+       // Todas las transacciones del usuario (sin filtro de fecha)
+    List<Transaction> findByUser(User user);
+
+    // Verificar si existe una transacción duplicada
+    boolean existsByAccountAndCategoryAndAmountAndDate(
+            Account account,
+            Category category,
+            BigDecimal amount,
+            LocalDate date);
 }

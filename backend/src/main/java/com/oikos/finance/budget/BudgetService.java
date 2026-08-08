@@ -47,6 +47,7 @@ public class BudgetService {
                 request.month(), request.year(),
                 request.recurring() != null ? request.recurring() : false);
         Budget saved = budgetRepository.save(budget);
+        return toResponse(saved);
     }
 
     // LISTAR (todos, o filtrados por mes/año si se indican)

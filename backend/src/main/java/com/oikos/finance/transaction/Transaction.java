@@ -42,7 +42,7 @@ public class Transaction {
     @Column
     private String note;
 
-    protected Transaction() {
+    public Transaction() {
     }
 
     public Transaction(User user, Account account, Category category,

@@ -9,6 +9,7 @@ public record AccountResponse(
         UUID id,
         String name,
         AccountType type,
+        BigDecimal initialBalance,
         BigDecimal balance
 ) {
 }
