@@ -17,9 +17,3 @@ public record DebtResponse(
     List<DebtPaymentDTO> payments,
     Instant createdAt
 ) {}
-
-record DebtPaymentDTO(
-    UUID id,
-    BigDecimal amount,
-    String date
-) {}
