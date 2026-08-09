@@ -10,6 +10,7 @@ import BudgetsPage from './pages/BudgetsPage.tsx';
 import RegisterPage from './pages/RegisterPage.tsx';
 import InvestmentsPage from './pages/InvestmentsPage.tsx';
 import DebtsPage from './pages/DebtsPage.tsx';
+import TransfersPage from './pages/TransfersPage.tsx';
 
 function App() {
   return (
@@ -92,6 +93,17 @@ function App() {
             <ProtectedRoute>
               <Layout>
                 <DebtsPage />
+              </Layout>
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/transfers"
+          element={
+            <ProtectedRoute>
+              <Layout>
+                <TransfersPage />
               </Layout>
             </ProtectedRoute>
           }

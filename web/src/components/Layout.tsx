@@ -10,6 +10,7 @@ const NAV_ITEMS = [
   { to: '/accounts', label: 'Cuentas', icon: '▤', end: false },
   { to: '/categories', label: 'Categorías', icon: '◈', end: false },
   { to: '/transactions', label: 'Transacciones', icon: '⇄', end: false },
+  { to: '/transfers', label: 'Transferencias', icon: '⇄', end: false },
   { to: '/budgets', label: 'Presupuestos', icon: '◎', end: false },
   { to: '/investments', label: 'Inversiones', icon: '▲', end: false },
   { to: '/debts', label: 'Deudas', icon: '◇', end: false },
