@@ -20,7 +20,7 @@ spring:
   flyway:
     enabled: true
     locations: classpath:db/migration
-    baselineOnMigrate: false
+    baselineOnMigrate: true
 
 server:
   port: 8080
