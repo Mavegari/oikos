@@ -2,6 +2,9 @@ package com.oikos.finance.transfer;
 
 import com.oikos.finance.account.Account;
 import com.oikos.finance.account.AccountRepository;
+import com.oikos.finance.transaction.Transaction;
+import com.oikos.finance.transaction.TransactionRepository;
+import com.oikos.finance.transaction.TransactionType;
 import com.oikos.finance.transfer.dto.TransferRequest;
 import com.oikos.finance.transfer.dto.TransferResponse;
 import com.oikos.finance.user.User;
@@ -15,10 +18,15 @@ public class TransferService {
     
     private final TransferRepository transferRepository;
     private final AccountRepository accountRepository;
+    private final TransactionRepository transactionRepository;
     
-    public TransferService(TransferRepository transferRepository, AccountRepository accountRepository) {
+    public TransferService(
+            TransferRepository transferRepository,
+            AccountRepository accountRepository,
+            TransactionRepository transactionRepository) {
         this.transferRepository = transferRepository;
         this.accountRepository = accountRepository;
+        this.transactionRepository = transactionRepository;
     }
     
     @Transactional
@@ -48,6 +56,8 @@ public class TransferService {
         
         Transfer saved = transferRepository.save(transfer);
         return toResponse(saved);
+
+        
     }
     
     public List<TransferResponse> findAll(User user) {
